@@ -23,11 +23,11 @@ class AuthManager extends Controller
             'password' => 'required',
         ]);
 
-        $credentials = $request->only(keys: 'email', 'password');
+        $credentials = $request->only('email', 'password');
         if(Auth::attempt($credentials)){
-            return redirect()->intended(route(name: 'home'));
+            return redirect('home');
         }
-        return redirect(route(name: 'login'))->with("error", "Invalid login credentials");
+        return redirect('login')->with("error", "Invalid login credentials");
     }
 
     function registrationPost(Request $request){
@@ -42,9 +42,9 @@ class AuthManager extends Controller
         $data['password'] = Hash::make($request->password);
         $user = User::create($data);
         if(!$user){
-            return redirect(route(name: 'registration'))->with("error", "Invalid registration. Try Again!");
+            return redirect('registration')->with("error", "Invalid registration. Try Again!");
         }
-        return redirect(route(name: 'login'))->with("success", "Registration successful. Login to access the app");
+        return redirect('login')->with("success", "Registration successful. Login to access the app");
     }
 
     function logout(){
