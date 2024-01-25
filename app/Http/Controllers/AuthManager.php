@@ -6,14 +6,22 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
+
 
 class AuthManager extends Controller
 {
     function login(){
+        if (Auth::check()){
+            return redirect('/');
+        }
         return view('login');
     }
 
     function registration(){
+        if (Auth::check()){
+            return redirect('/');
+        }
         return view('registration');
     }
 
@@ -25,7 +33,7 @@ class AuthManager extends Controller
 
         $credentials = $request->only('email', 'password');
         if(Auth::attempt($credentials)){
-            return redirect('home');
+            return redirect('/');
         }
         return redirect('login')->with("error", "Invalid login credentials");
     }
@@ -50,6 +58,6 @@ class AuthManager extends Controller
     function logout(){
         Session::flush();
         Auth::logout();
-        return redirect(route(name: 'login'));
+        return redirect('/login');
     }
 }

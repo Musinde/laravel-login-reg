@@ -22,3 +22,8 @@ Route::post('/login', [AuthManager::class, 'loginPost']);
 Route::get('/registration', [AuthManager::class, 'registration']);
 Route::post('/registration', [AuthManager::class, 'registrationPost']);
 Route::get('/logout', [AuthManager::class, 'logout']);
+Route::group(['middleware' => 'auth'], function (){
+    Route::get('/profile', function (){
+        return "Hello";
+    });
+});
