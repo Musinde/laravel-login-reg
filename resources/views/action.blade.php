@@ -39,7 +39,7 @@
         <form method="DELETE" action="{{url('/delete/'.$member->id)}}">
             @csrf
                 <h4 class="text-center">Are you sure you want to delete Member?</h4>
-                <h5 class="text-center">Name: {{$member->fullname}} </h5>
+                <h5 class="text-center">Name: {{$member->Fullname}} </h5>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
