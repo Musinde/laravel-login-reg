@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthManager;
+use App\Http\Controllers\MemberController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,3 +28,8 @@ Route::group(['middleware' => 'auth'], function (){
         return "Hello";
     });
 });
+Route::get('/', [MemberController:: class, 'index']);
+Route::get('/', [MemberController:: class, 'getMembers']);
+Route::post('/save', [MemberController:: class, 'save']);
+Route::post('/update/{id}', [MemberController:: class, 'update']);
+Route::get('/delete/{id}', [MemberController:: class, 'delete']);
